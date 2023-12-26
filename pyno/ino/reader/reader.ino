@@ -10,7 +10,7 @@ unsigned long int current_times[9];
 uint8_t previous_pin_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 uint8_t current_pin_state[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
 uint8_t pin_numbers[9] = {2, 3, 4, 5, 6, 7, 8, 9, 10};
-uint8_t number_of_channel = 5;
+uint8_t number_of_channel = 9;
 uint8_t i;
 
 void loop() {
