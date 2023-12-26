@@ -17,8 +17,6 @@ if __name__ == "__main__":
         ArduinoConnecter(setting).write_sketch()
 
     # Connect to arduino
-    available_boards = check_connected_board_info()
-
     for board in check_connected_board_info():
         setting = ArduinoSetting.derive_from_portinfo(board).apply_setting(
             {"baudrate": 115200}
