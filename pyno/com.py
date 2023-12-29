@@ -7,6 +7,8 @@ from serial import Serial
 
 class PortInfo(object):
     def __init__(self, rawinfo: dict):
+        from serial.tools.list_ports import grep
+
         self._rawinfo = rawinfo
         _boardinfo: Optional[list[dict]] = rawinfo.get("matchingboards")
         portinfo: Optional[dict] = rawinfo.get("port")
@@ -17,6 +19,10 @@ class PortInfo(object):
         self.__board: Optional[str] = boardinfo.get("name")
         self.__fqbn: Optional[str] = boardinfo.get("fqbn")
         self.__port: Optional[str] = portinfo.get("address")
+        if self.__port is not None:
+            ports = list(grep(self.__port))
+            if len(ports) > 0:
+                self.__serial_number = ports[0].serial_number
 
     @property
     def board(self) -> Optional[str]:
@@ -29,6 +35,10 @@ class PortInfo(object):
     @property
     def port(self) -> Optional[str]:
         return self.__port
+
+    @property
+    def serial_number(self) -> Optional[str]:
+        return self.__serial_number
 
     def __repr__(self) -> str:
         return f"{self.board} at {self.port}"
